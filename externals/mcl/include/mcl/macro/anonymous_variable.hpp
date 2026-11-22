@@ -6,8 +6,5 @@
 
 #include <mcl/macro/concatenate_tokens.hpp>
 
-#ifdef __COUNTER__
-#    define ANONYMOUS_VARIABLE(str) CONCATENATE_TOKENS(str, __COUNTER__)
-#else
-#    define ANONYMOUS_VARIABLE(str) CONCATENATE_TOKENS(str, __LINE__)
-#endif
+// __COUNTER__ triggers -Werror,-Wc2y-extensions under Clang 22.1.8 with -pedantic-errors; use __LINE__.
+#define ANONYMOUS_VARIABLE(str) CONCATENATE_TOKENS(str, __LINE__)
